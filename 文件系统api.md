@@ -1,1 +1,8 @@
 - 软连接 可以将目录树变成一个目录图；
+- 涉及api：mount point mount umount mmap read write ftruncate lseek; 
+- 目录树或者目录图，可以mount虚拟设备；
+- 文件系统的两大主要部分
+  - 虚拟磁盘 (文件)
+  - mmap, read, write, lseek, ftruncate, ...
+  - 虚拟磁盘命名管理 (目录树和链接)
+  - mount, chdir, mkdir, rmdir, link, unlink, symlink, open, ...
