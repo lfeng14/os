@@ -32,3 +32,67 @@
 
 -  文件系统在bread bwrite基础上抽象出来的；section < cluster < partial < volume
 - 照抄手册，遍历目录树：[fatree.c](https://jyywiki.cn/pages/OS/2022/demos/fatree.c)
+- 碎片整理，先拷贝数据，后修复fat表；为什么碎片多影响性能 ？空间局部性差 ？
+- 可靠性->fat副本->性能问题，多次修改
+- 磁盘格式化，其实保留数据，只是破坏了fat表这种元数据，所以xx事件才会出现。
+- ext2改善了数据链表方式获取数据：通过多级索引快速访问数据：一级索引、二级索引、三级索引；大文件随机读写性能好，小文件性能没有损失；兼顾了两者。
+<img width="1466" height="1244" alt="image" src="https://github.com/user-attachments/assets/58b384d3-2aa0-4fc6-9fe1-ec82e07604f6" />
+<img width="1812" height="1530" alt="image" src="https://github.com/user-attachments/assets/601aec45-9975-4713-b595-b38f7a6c8400" />
+<img width="1858" height="1596" alt="image" src="https://github.com/user-attachments/assets/c0ddfcf6-91c4-4da3-8814-99d76a34fb2e" />
+
+- ext2 [inode信息](https://jyywiki.cn/pages/OS/2022/demos/ext2.h)
+  ```
+  struct ext2_inode {
+  	__le16	i_mode;		/* File mode */
+  	__le16	i_uid;		/* Low 16 bits of Owner Uid */
+  	__le32	i_size;		/* Size in bytes */
+  	__le32	i_atime;	/* Access time */
+  	__le32	i_ctime;	/* Creation time */
+  	__le32	i_mtime;	/* Modification time */
+  	__le32	i_dtime;	/* Deletion Time */
+  	__le16	i_gid;		/* Low 16 bits of Group Id */
+  	__le16	i_links_count;	/* Links count */
+  	__le32	i_blocks;	/* Blocks count */
+  	__le32	i_flags;	/* File flags */
+  	union {
+  		struct {
+  			__le32  l_i_reserved1;
+  		} linux1;
+  		struct {
+  			__le32  h_i_translator;
+  		} hurd1;
+  		struct {
+  			__le32  m_i_reserved1;
+  		} masix1;
+  	} osd1;				/* OS dependent 1 */
+  	__le32	i_block[EXT2_N_BLOCKS];/* Pointers to blocks */
+  	__le32	i_generation;	/* File version (for NFS) */
+  	__le32	i_file_acl;	/* File ACL */
+  	__le32	i_dir_acl;	/* Directory ACL */
+  	__le32	i_faddr;	/* Fragment address */
+  	union {
+  		struct {
+  			__u8	l_i_frag;	/* Fragment number */
+  			__u8	l_i_fsize;	/* Fragment size */
+  			__u16	i_pad1;
+  			__le16	l_i_uid_high;	/* these 2 fields    */
+  			__le16	l_i_gid_high;	/* were reserved2[0] */
+  			__u32	l_i_reserved2;
+  		} linux2;
+  		struct {
+  			__u8	h_i_frag;	/* Fragment number */
+  			__u8	h_i_fsize;	/* Fragment size */
+  			__le16	h_i_mode_high;
+  			__le16	h_i_uid_high;
+  			__le16	h_i_gid_high;
+  			__le32	h_i_author;
+  		} hurd2;
+  		struct {
+  			__u8	m_i_frag;	/* Fragment number */
+  			__u8	m_i_fsize;	/* Fragment size */
+  			__u16	m_pad1;
+  			__u32	m_i_reserved2[2];
+  		} masix2;
+  	} osd2;				/* OS dependent 2 */
+  };
+  ```
