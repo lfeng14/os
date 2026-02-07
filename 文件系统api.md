@@ -16,7 +16,10 @@
 
   // bread bwrite
   ```
-- fat: file allocation table: 传统，U盘兼容性好；单个大小小；FAT 是比较传统的文件系统，兼容性特别好，很多老设备都支持，但它单个文件大小和分区容量有限。UEFI分区也是fat文件系统；
+- fat: 以cluster为单位，目录表存放特定的位置；file allocation table: 传统，U盘兼容性好；单个大小小；FAT 是比较传统的文件系统，兼容性特别好，很多老设备都支持，但它单个文件大小和分区容量有限。UEFI分区也是fat文件系统；
+  ```
+  mkfs.fat -C fat512.img 1024
+  ```
 - ntfs：windows文件系统，能管理大文件和分区。Windows 常用的，能管理很大的文件和分区，还支持文件权限设置这些高级功能。
 - apfs：mac系统对固态硬盘性能优化不错，APFS 是 Mac 系统为固态硬盘设计的，性能好，支持加密和空间共享。
 - ext4：ext4 呢，是 Linux 常用的，稳定性强，适合各种 Linux 发行版，也能很好地管理磁盘空间。
@@ -27,4 +30,5 @@
   - next指针单独存放，如果损坏整个盘挂了；[fat文件系统手册](https://jyywiki.cn/pages/OS/manuals/MSFAT-spec.pdf)
   <img width="2210" height="1462" alt="image" src="https://github.com/user-attachments/assets/65bc2c50-d1b4-42d7-9451-13eab6f591bc" />
 
--  section < cluster < partial < volume
+-  文件系统在bread bwrite基础上抽象出来的；section < cluster < partial < volume
+- 照抄手册，遍历目录树：[fatree.c](https://jyywiki.cn/pages/OS/2022/demos/fatree.c)
