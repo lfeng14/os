@@ -1,3 +1,8 @@
+- 基于block read、block write一层一层做抽象->block alloca、 block free->目录的抽象
+  ```
+  首先，block alloc 主要负责分配磁盘块，你可以在已有的读写函数基础上，通过记录哪些块是空闲的，哪些已经被使用，来实现分配功能。比如维护一个空闲块列表，当需要分配新块时，从这个列表中取出一块并标记为已使用。
+  而 block free 呢，就是反向操作，将释放的磁盘块标记为空闲，放回空闲块列表。在实现过程中，可以借助一些数据结构，像位图（bitmap）来高效地记录磁盘块的使用状态。比如每一位对应一个磁盘块，0 表示空闲，1 表示已使用。这样，结合 block read 和 block write，就能实现对磁盘块的分配和释放抽象啦。
+  ```
 - 软连接 可以将目录树变成一个目录图；
 - 涉及api：mount point mount umount mmap read write ftruncate lseek; 
 - 目录树或者目录图，可以mount虚拟设备；
@@ -40,7 +45,7 @@
 <img width="1812" height="1530" alt="image" src="https://github.com/user-attachments/assets/601aec45-9975-4713-b595-b38f7a6c8400" />
 <img width="1858" height="1596" alt="image" src="https://github.com/user-attachments/assets/c0ddfcf6-91c4-4da3-8814-99d76a34fb2e" />
 
-- ext2 [inode信息](https://jyywiki.cn/pages/OS/2022/demos/ext2.h)
+- ext2 [inode信息](https://jyywiki.cn/pages/OS/2022/demos/ext2.h) 若存储inode数据损坏后果挺严重。
   ```
   struct ext2_inode {
   	__le16	i_mode;		/* File mode */
