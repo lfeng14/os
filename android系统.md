@@ -4,3 +4,4 @@
 - 诺基亚为什么死掉，因为编程模型是c++；安卓为什么火，因为编程模型是java，开发者要求相对低；安卓本身是个linux；
 - 安卓做了crash consistency很多事情，才让更多的开发者可以方便开发app；
   <img width="2278" height="1666" alt="image" src="https://github.com/user-attachments/assets/9a392cf3-4f5c-4c95-b8e6-5deedbee393d" />
+https://developer.android.com/static/guide/platform/images/android-stack_2x.png?hl=zh-tw<img width="1384" height="2038" alt="image" src="https://github.com/user-attachments/assets/1f35d66b-a439-417e-a761-c1753e81c517" />
