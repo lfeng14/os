@@ -32,3 +32,17 @@
     gdb.execute('run fs.img README user/_ls')
     gdb.execute('quit')
   ```
+- 结果分析：写一个数据需要调用这些接口，你想想 数据出问题的概率是不是容易失败，所以需要buffer cache,读写减少io操作开销；还有另外一种方式：write ahead log。
+  ```
+    iappend(inum=1, n=16)
+        rinode(inum=1)
+            rsect(sec=33)
+        rsect(sec=47)
+        wsect(sec=47)
+        winode(inum=1)
+            rsect(sec=33)
+            wsect(sec=33)
+  ```
+- bug定位：cpu飙高->perf top锁定函数->确定是usb函数->物理usb有问题
+- 可见gdb有很多层用法，所以gdb更多高阶用法可以继续调研。
+- 
