@@ -1,4 +1,4 @@
-### 示例
+-  示例
 ```
 franz@ubuntu:~/src$ cat demo.c 
 #include <unistd.h>
@@ -15,11 +15,11 @@ int main() {
  print("Hello, World!\n");
 }
 ```
-### 构建
+-  构建
   ```
   gcc demo.c -o demo
   ```
-### 用strace分析执行哪些系统调用
+-  用strace分析执行哪些系统调用
   ```
   strace ./demo
   execve("./demo", ["./demo"], 0xffffd7f1fcf0 /* 23 vars */) = 0
@@ -210,8 +210,8 @@ int main() {
   exit_group(0)                           = ?
   +++ exited with 0 +++
   ```
-### 说明linux系统内可以通过fork拷贝状态机也可以通过execve命令reset重置状态机，通过exit、_exit、__exit来销毁线程、进程等
-### 同样也可以通过strace命令来分析gcc构建时调用了哪些
+-  说明linux系统内可以通过fork拷贝状态机也可以通过execve命令reset重置状态机，通过exit、_exit、__exit来销毁线程、进程等
+-  同样也可以通过strace命令来分析gcc构建时调用了哪些
   ```
   strace gcc demo.c -o demo
   execve("/usr/bin/gcc", ["gcc", "demo.c", "-o", "demo"], 0xffffda670c58 /* 23 vars */) = 0
