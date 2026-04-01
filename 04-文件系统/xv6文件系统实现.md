@@ -50,4 +50,4 @@
 - 这个章节有[代码导读](https://www.bilibili.com/video/BV1LT4y1B79b?spm_id_from=333.788.videopod.sections&vd_source=2211521a84d324c18aba00755ad3bcec)
 - 磁盘写操作：先写日志，再落盘，最后再去做写磁盘具体数据（比如三个块，将buf搬移到硬盘）；最后标记日志完成清理日志；即使系统奔溃也有对应recover动作；
 - 手搓测试框架：故障注入，qemu对指定地址写入数据则触发关机，然后保存快照：
-  <img width="2066" height="1664" alt="image" src="https://github.com/user-attachments/assets/8309264d-6dd9-413b-a8fe-a884c5950076" />
+  <img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/8309264d-6dd9-413b-a8fe-a884c5950076" />
