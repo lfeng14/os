@@ -34,7 +34,7 @@
   <img width="750" height="390" alt="image" src="https://github.com/user-attachments/assets/3b4f1aac-0171-4e64-9002-d40d1b49b17f" />
 
   - next指针单独存放，如果损坏整个盘挂了；[fat文件系统手册](https://jyywiki.cn/pages/OS/manuals/MSFAT-spec.pdf)
-  <img width="1100" height="700" alt="image" src="https://github.com/user-attachments/assets/65bc2c50-d1b4-42d7-9451-13eab6f591bc" />
+  <img width="550" height="350" alt="image" src="https://github.com/user-attachments/assets/65bc2c50-d1b4-42d7-9451-13eab6f591bc" />
 
 -  文件系统在bread bwrite基础上抽象出来的；section < cluster < partial < volume
 - 照抄手册，遍历目录树：[fatree.c](https://jyywiki.cn/pages/OS/2022/demos/fatree.c)
@@ -42,9 +42,9 @@
 - 可靠性->fat副本->性能问题，多次修改
 - 磁盘格式化，其实保留数据，只是破坏了fat表这种元数据，所以xx事件才会出现。
 - ext2改善了数据链表方式获取数据：通过多级索引快速访问数据：一级索引、二级索引、三级索引；大文件随机读写性能好，小文件性能没有损失；兼顾了两者。
-<img width="700" height="600" alt="image" src="https://github.com/user-attachments/assets/58b384d3-2aa0-4fc6-9fe1-ec82e07604f6" />
-<img width="900" height="750" alt="image" src="https://github.com/user-attachments/assets/601aec45-9975-4713-b595-b38f7a6c8400" />
-<img width="900" height="800" alt="image" src="https://github.com/user-attachments/assets/c0ddfcf6-91c4-4da3-8814-99d76a34fb2e" />
+<img width="350" height="300" alt="image" src="https://github.com/user-attachments/assets/58b384d3-2aa0-4fc6-9fe1-ec82e07604f6" />
+<img width="450" height="370" alt="image" src="https://github.com/user-attachments/assets/601aec45-9975-4713-b595-b38f7a6c8400" />
+<img width="450" height="400" alt="image" src="https://github.com/user-attachments/assets/c0ddfcf6-91c4-4da3-8814-99d76a34fb2e" />
 
 - ext2 [inode信息](https://jyywiki.cn/pages/OS/2022/demos/ext2.h) 若存储inode数据损坏后果挺严重。
   ```
